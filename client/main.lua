@@ -140,8 +140,6 @@ function UpdateMoney()
         bank = bank
     })
 end
-
-        end
         
         SendNUIMessage({
             action = 'updateMoney',
