@@ -107,3 +107,22 @@ exports['blunova_hud']:IsHudVisible()
 ---
 
 **Author:** BluNovaESX
+
+
+## 📸 Preview / Showcase
+
+### 🆔 Player ID
+![Player ID](assets/hud-player-id.png)
+
+---
+
+### 💰 Money HUD
+![Money HUD](assets/hud-money.png)
+
+---
+
+### ❤️ Status HUD (Health, Armor, Hunger, Thirst)
+![Status HUD](assets/hud-status.png)
+
+*Design & Entwicklung: BluNovaESX*
+
