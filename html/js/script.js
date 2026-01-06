@@ -247,6 +247,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cash: 0,
         bank: 0
     });
-    
-    console.log('[Modern HUD] Initialized');
+
+    const DEBUG = false;
+
+    if (DEBUG) {
+        console.log('[BluNova HUD] Initialized');
+    }
 });
+
+
