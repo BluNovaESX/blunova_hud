@@ -1,0 +1,492 @@
+/* ═══════════════════════════════════════════════════
+   MODERN HUD - MINIMALISTISCHES DESIGN
+   Farbe: Hellblau (#00d4ff)
+═══════════════════════════════════════════════════ */
+
+:root {
+    --primary: #00d4ff;
+    --primary-rgb: 0, 212, 255;
+    --secondary: #00ffcc;
+    --accent: #0099cc;
+    
+    --health: #ff3b5c;
+    --armor: #00d4ff;
+    --hunger: #ff9f1c;
+    --thirst: #00b4d8;
+    
+    --dark: #0a0a0f;
+    --dark-alpha: rgba(10, 10, 15, 0.7);
+    --white: #ffffff;
+    --white-soft: rgba(255, 255, 255, 0.9);
+    --gray: rgba(255, 255, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* ═══════════════════════════════════════════════════
+   STATUS CIRCLES - Über der Minimap
+═══════════════════════════════════════════════════ */
+
+#status-hud {
+    position: fixed;
+    bottom: 195px;
+    left: 26px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+}
+
+.circle-stat {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.circle-stat svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: var(--gray);
+    stroke-width: 2.8;
+}
+
+.circle-fill {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.4s ease;
+}
+
+.circle-fill.health {
+    stroke: var(--health);
+    filter: drop-shadow(0 0 6px var(--health));
+}
+
+.circle-fill.armor {
+    stroke: var(--armor);
+    filter: drop-shadow(0 0 6px var(--armor));
+}
+
+.circle-fill.hunger {
+    stroke: var(--hunger);
+    filter: drop-shadow(0 0 6px var(--hunger));
+}
+
+.circle-fill.thirst {
+    stroke: var(--thirst);
+    filter: drop-shadow(0 0 6px var(--thirst));
+}
+
+.circle-stat i {
+    font-size: 14px;
+    color: var(--white);
+    z-index: 2;
+    opacity: 0.9;
+}
+
+#health-stat i { color: var(--health); }
+#armor-stat i { color: var(--armor); }
+#hunger-stat i { color: var(--hunger); }
+#thirst-stat i { color: var(--thirst); }
+
+/* Low Value Warnung */
+.circle-stat.warning .circle-fill {
+    animation: pulse-warning 1s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ═══════════════════════════════════════════════════
+   MIKROFON INDICATOR
+═══════════════════════════════════════════════════ */
+
+.mic-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    margin-left: 6px;
+}
+
+.mic-indicator i {
+    font-size: 14px;
+    color: var(--gray);
+    transition: all 0.2s ease;
+}
+
+.mic-indicator.talking i {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+}
+
+.mic-waves {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 14px;
+}
+
+.mic-waves span {
+    width: 3px;
+    height: 4px;
+    background: var(--gray);
+    border-radius: 2px;
+    transition: all 0.15s ease;
+}
+
+.mic-indicator.talking .mic-waves span {
+    background: var(--primary);
+    box-shadow: 0 0 6px var(--primary);
+}
+
+.mic-indicator.talking .mic-waves span:nth-child(1) {
+    animation: wave 0.4s ease-in-out infinite;
+}
+.mic-indicator.talking .mic-waves span:nth-child(2) {
+    animation: wave 0.4s ease-in-out infinite 0.1s;
+}
+.mic-indicator.talking .mic-waves span:nth-child(3) {
+    animation: wave 0.4s ease-in-out infinite 0.2s;
+}
+
+@keyframes wave {
+    0%, 100% { height: 4px; }
+    50% { height: 14px; }
+}
+
+/* ═══════════════════════════════════════════════════
+   MONEY HUD - Oben Rechts
+═══════════════════════════════════════════════════ */
+
+#money-hud {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.money-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 8px;
+    border: none;
+    min-width: 140px;
+    transition: all 0.3s ease;
+}
+
+.money-item:hover {
+    transform: translateX(-3px);
+}
+
+.money-item i {
+    font-size: 16px;
+    color: #2ecc71;
+    width: 20px;
+    text-align: center;
+}
+
+.money-item.bank i {
+    color: var(--primary);
+}
+
+.money-item span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.5px;
+}
+
+/* Money Update Animation */
+.money-item.updated {
+    animation: money-flash 0.5s ease;
+}
+
+@keyframes money-flash {
+    0%, 100% { background: var(--dark-alpha); }
+    50% { background: rgba(var(--primary-rgb), 0.2); }
+}
+
+/* ═══════════════════════════════════════════════════
+   VEHICLE HUD - Unten Rechts
+═══════════════════════════════════════════════════ */
+
+#vehicle-hud {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+#vehicle-hud.active {
+    display: flex;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Speedometer */
+.speedometer {
+    position: relative;
+    width: 110px;
+    height: 110px;
+}
+
+.speedometer svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.speed-bg {
+    fill: none;
+    stroke: var(--gray);
+    stroke-width: 4;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 70;
+    stroke-linecap: round;
+}
+
+.speed-progress {
+    fill: none;
+    stroke: url(#speedGrad);
+    stroke-width: 4;
+    stroke-dasharray: 0, 283;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px var(--primary));
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.speed-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.speed-value {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(var(--primary-rgb), 0.5);
+}
+
+.speed-unit {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+/* Vehicle Info Panel */
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Fuel */
+.fuel-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 6px;
+    border: none;
+}
+
+.fuel-container i {
+    font-size: 12px;
+    color: #2ecc71;
+}
+
+.fuel-bar {
+    width: 60px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.fuel-level {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+}
+
+.fuel-level.low {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+    animation: pulse-warning 1s infinite;
+}
+
+.fuel-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--white-soft);
+    min-width: 32px;
+}
+
+/* Vehicle Icons */
+.vehicle-icons {
+    display: flex;
+    gap: 6px;
+}
+
+.v-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 6px;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.v-icon i {
+    font-size: 14px;
+    color: #e74c3c;
+    transition: all 0.2s ease;
+}
+
+.v-icon.active {
+    background: transparent;
+}
+
+.v-icon.active i {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+}
+
+/* Engine specific */
+#engine-icon.active i {
+    color: #2ecc71;
+    text-shadow: 0 0 10px #2ecc71;
+}
+
+/* Belt specific */
+#belt-icon.active i {
+    color: #2ecc71;
+    text-shadow: 0 0 10px #2ecc71;
+}
+
+/* ═══════════════════════════════════════════════════
+   PLAYER ID - Schönes hellblaues Design
+═══════════════════════════════════════════════════ */
+
+#player-id-box {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    padding: 8px 16px;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--primary-rgb), 0.5);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+}
+
+#player-id-box span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--primary);
+}
+
+/* ═══════════════════════════════════════════════════
+   UTILITY CLASSES
+═══════════════════════════════════════════════════ */
+
+.hidden {
+    display: none !important;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Armor hidden when 0 */
+#armor-stat.empty {
+    opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════ */
+
+@media screen and (max-width: 1600px) {
+    .circle-stat {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .speedometer {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .speed-value {
+        font-size: 24px;
+    }
+}

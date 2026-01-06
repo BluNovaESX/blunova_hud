@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern HUD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Status Circles (unten links) -->
+    <div id="status-hud">
+        <div class="circle-stat" id="health-stat">
+            <svg viewBox="0 0 36 36">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle-fill health" id="health-ring" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <i class="fas fa-heart"></i>
+        </div>
+
+        <div class="circle-stat" id="armor-stat">
+            <svg viewBox="0 0 36 36">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle-fill armor" id="armor-ring" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <i class="fas fa-shield-halved"></i>
+        </div>
+
+        <div class="circle-stat" id="hunger-stat">
+            <svg viewBox="0 0 36 36">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle-fill hunger" id="hunger-ring" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <i class="fas fa-utensils"></i>
+        </div>
+
+        <div class="circle-stat" id="thirst-stat">
+            <svg viewBox="0 0 36 36">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle-fill thirst" id="thirst-ring" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <i class="fas fa-droplet"></i>
+        </div>
+
+        <div class="mic-indicator" id="mic-indicator">
+            <i class="fas fa-microphone"></i>
+            <div class="mic-waves" id="mic-waves">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Money (oben rechts) - Clean Design -->
+    <div id="money-hud">
+        <div class="money-item" id="cash-box">
+            <i class="fas fa-wallet"></i>
+            <span id="cash-value">$0</span>
+        </div>
+        <div class="money-item bank" id="bank-box">
+            <i class="fas fa-building-columns"></i>
+            <span id="bank-value">$0</span>
+        </div>
+    </div>
+
+    <!-- Vehicle HUD (unten rechts) -->
+    <div id="vehicle-hud">
+        <!-- Speedometer -->
+        <div class="speedometer">
+            <svg viewBox="0 0 120 120">
+                <defs>
+                    <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#00d4ff"/>
+                        <stop offset="100%" style="stop-color:#00ffcc"/>
+                    </linearGradient>
+                </defs>
+                <circle class="speed-bg" cx="60" cy="60" r="54"/>
+                <circle class="speed-progress" id="speed-ring" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="speed-content">
+                <span class="speed-value" id="speed-value">0</span>
+                <span class="speed-unit">KM/H</span>
+            </div>
+        </div>
+
+        <!-- Vehicle Info -->
+        <div class="vehicle-info">
+            <div class="fuel-container">
+                <i class="fas fa-gas-pump"></i>
+                <div class="fuel-bar">
+                    <div class="fuel-level" id="fuel-fill"></div>
+                </div>
+                <span class="fuel-text" id="fuel-value">100%</span>
+            </div>
+
+            <div class="vehicle-icons">
+                <div class="v-icon" id="engine-icon" data-tooltip="Motor">
+                    <i class="fas fa-power-off"></i>
+                </div>
+                <div class="v-icon" id="belt-icon" data-tooltip="Gurt">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player ID -->
+    <div id="player-id-box">
+        <span id="player-id">ID: 1</span>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
