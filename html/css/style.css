@@ -39,7 +39,7 @@ body {
 
 #status-hud {
     position: fixed;
-    bottom: 195px;
+    bottom: 220px;
     left: 26px;
     display: flex;
     align-items: center;
