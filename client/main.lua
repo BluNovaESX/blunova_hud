@@ -110,18 +110,20 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 end)
 
 -- ===== GELD UPDATE =====
-function UpdateMoney()
+local function UpdateMoney()
+    if not ESX then return end
+
     local xPlayer = ESX.GetPlayerData()
     if not xPlayer then return end
 
-    local cash = 0
-    local bank = 0
+    local cash, bank = 0, 0
 
     -- ESX Accounts (Legacy & ältere Versionen)
     if xPlayer.accounts then
         for _, account in pairs(xPlayer.accounts) do
             local name = account.name or account.account
             local money = account.money or account.balance or 0
+
             if name == 'money' then
                 cash = money
             elseif name == 'bank' then
@@ -139,14 +141,6 @@ function UpdateMoney()
         cash = cash,
         bank = bank
     })
-end
-        
-        SendNUIMessage({
-            action = 'updateMoney',
-            cash = cash,
-            bank = bank
-        })
-    end)
 end
 
 -- ===== HAUPT-UPDATE LOOP =====
